@@ -3,7 +3,7 @@
 Module for tasks
 """
 import requests
-import sys
+from sys import argv
 
 
 def get_user_info_and_todos(id):
@@ -33,5 +33,7 @@ def get_user_info_and_todos(id):
 
 
 if __name__ == "__main__":
-    id = int(sys.argv[1])
+    if len(argv) < 2:
+        exit()
+    id = int(argv[1])
     get_user_info_and_todos(id)
