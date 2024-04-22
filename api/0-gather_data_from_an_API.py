@@ -7,6 +7,9 @@ import sys
 
 
 def get_user_info_and_todos(id):
+    """
+    Retrieves user information and todos based on the given user ID.
+    """
     base_url = "https://jsonplaceholder.typicode.com"
 
     user = requests.get(f"{base_url}/users/{id}").json()
@@ -22,7 +25,9 @@ def get_user_info_and_todos(id):
             completed_tasks_count += 1
             completed_tasks.append(task.get("title"))
 
-    print(f"Employee {user_name} is done with tasks({completed_tasks_count}/{total_tasks}):")
+    print(f"Employee {user_name} is done with tasks"
+          f"({completed_tasks_count}/{total_tasks}):")
+
     for task in completed_tasks:
         print("\t " + task)
 
