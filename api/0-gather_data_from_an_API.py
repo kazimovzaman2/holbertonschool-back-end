@@ -29,7 +29,7 @@ def get_user_info_and_todos(id):
           f"({completed_tasks_count}/{total_tasks}):")
 
     for task in completed_tasks:
-        print("     " + task)
+        print("\t " + task)
 
 
 if __name__ == "__main__":
