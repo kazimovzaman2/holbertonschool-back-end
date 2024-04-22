@@ -12,10 +12,10 @@ def get_user_info_and_todos(id):
     """
     base_url = "https://jsonplaceholder.typicode.com"
 
-    user = requests.get(f"{base_url}/users/{id}").json()
+    user = requests.get("{}/users/{}".format(base_url, id)).json()
     user_name = user.get("name")
 
-    todo = requests.get(f"{base_url}/todos?userId={id}").json()
+    todo = requests.get("{}/todos?userId={}".format(base_url, id)).json()
     total_tasks = len(todo)
     completed_tasks_count = 0
     completed_tasks = []
@@ -25,8 +25,11 @@ def get_user_info_and_todos(id):
             completed_tasks_count += 1
             completed_tasks.append(task.get("title"))
 
-    print(f"Employee {user_name} is done with tasks"
-          f"({completed_tasks_count}/{total_tasks}):")
+    print(
+        "Employee {} is done with tasks({}/{}):".format(
+            user_name, completed_tasks_count, total_tasks
+        )
+    )
 
     for task in completed_tasks:
         print("\t " + task)
