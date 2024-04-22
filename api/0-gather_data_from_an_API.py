@@ -6,24 +6,21 @@ import requests
 from sys import argv
 
 
-def get_user_info_and_todos(id):
+def main(id):
     """
     Retrieves user information and todos based on the given user ID.
     """
     base_url = "https://jsonplaceholder.typicode.com"
+    user_url = "{}/users/{}".format(base_url, id)
+    todo_url = "{}/todos?userId={}".format(base_url, id)
 
-    user = requests.get("{}/users/{}".format(base_url, id)).json()
+    user = requests.get(user_url).json()
+    todos = requests.get(todo_url).json()
+
     user_name = user.get("name")
-
-    todo = requests.get("{}/todos?userId={}".format(base_url, id)).json()
-    total_tasks = len(todo)
-    completed_tasks_count = 0
-    completed_tasks = []
-
-    for task in todo:
-        if task.get("completed"):
-            completed_tasks_count += 1
-            completed_tasks.append(task.get("title"))
+    total_tasks = len(todos)
+    completed_tasks = [task.get("title") for task in todos if task.get("completed")]
+    completed_tasks_count = len(completed_tasks)
 
     print(
         "Employee {} is done with tasks({}/{}):".format(
@@ -36,7 +33,6 @@ def get_user_info_and_todos(id):
 
 
 if __name__ == "__main__":
-    if len(argv) < 2:
-        exit()
-    id = int(argv[1])
-    get_user_info_and_todos(id)
+    if len(argv) == 2:
+        id = int(argv[1])
+        main(id)
