@@ -7,12 +7,12 @@ import requests
 from sys import argv
 
 
-def main(id):
+def main():
     """
     Retrieves user information and todos based on the given user ID.
     """
     base_url = "https://jsonplaceholder.typicode.com"
-    user_url = "{}/users/{}".format(base_url, id)
+    user_url = "{}/users/".format(base_url)
 
     users = requests.get(user_url).json()
 
@@ -35,11 +35,9 @@ def main(id):
 
             final_dict[user.get("id")] = new_user_list
 
-    with open(f"{id}.json", "w") as f:
+    with open("todo_all_employees.json", "w") as f:
         json.dump(final_dict, f)
 
 
 if __name__ == "__main__":
-    if len(argv) == 2:
-        id = int(argv[1])
-        main(id)
+    main()
