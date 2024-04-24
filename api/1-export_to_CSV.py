@@ -2,8 +2,8 @@
 """
 Module for tasks
 """
-import requests
 import csv
+import requests
 from sys import argv
 
 
@@ -22,7 +22,7 @@ def main(id):
         with open(f"{user["id"]}.csv", "a") as f:
             file = csv.writer(f, quoting=csv.QUOTE_ALL)
             file.writerow(
-                [user["id"], user["name"], task["completed"], task["title"]]
+                [user["id"], user["username"], task["completed"], task["title"]]
             )
 
 
