@@ -19,7 +19,9 @@ def main(id):
 
     user_name = user.get("name")
     total_tasks = len(todos)
-    completed_tasks = [task.get("title") for task in todos if task.get("completed")]
+    completed_tasks = [
+        task.get("title") for task in todos if task.get("completed")
+    ]
     completed_tasks_count = len(completed_tasks)
 
     print(
